@@ -1,0 +1,19 @@
+{% extends 'admin_back/baseback.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Create new User</h5>
+            <div class="card">
+                <div class="card-body">
+                    {{ include('admin_back/user/_form.html.twig', {'button_label': 'Update'}) }}
+
+                    <a href="{{ path('back_user_index') }}" class="btn btn-warning">back to list</a>
+                    <br> <br>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

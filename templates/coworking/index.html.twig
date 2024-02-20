@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coworking index{% endblock %}
+
+{% block body %}
+    <h1>Coworking index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Idco</th>
+                <th>Description</th>
+                <th>Tarifs</th>
+                <th>Dispo</th>
+                <th>Horaireouvr</th>
+                <th>Horairefer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coworking in coworkings %}
+            <tr>
+                <td>{{ coworking.id }}</td>
+                <td>{{ coworking.idco }}</td>
+                <td>{{ coworking.description }}</td>
+                <td>{{ coworking.tarifs }}</td>
+                <td>{{ coworking.dispo }}</td>
+                <td>{{ coworking.horaireouvr }}</td>
+                <td>{{ coworking.horairefer }}</td>
+                <td>
+                    <a href="{{ path('app_coworking_show', {'id': coworking.id}) }}">show</a>
+                    <a href="{{ path('app_coworking_edit', {'id': coworking.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_coworking_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Coworking{% endblock %}
+
+{% block body %}
+    <h1>Edit Coworking</h1>
+
+    {{ include('coworking/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_coworking_index') }}">back to list</a>
+
+    {{ include('coworking/_delete_form.html.twig') }}
+{% endblock %}

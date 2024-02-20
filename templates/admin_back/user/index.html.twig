@@ -1,0 +1,58 @@
+{% extends 'admin_back/baseback.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">List users</h5>
+            <div class="card">
+                <div class="card-body">
+                    <a href="{{ path('back_user_new') }}" class="btn btn-primary">Create new</a>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Sexe</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% for role in user.roles %}
+                                        {% if role != 'ROLE_USER' %}
+                                            {{ role }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>{{ user.nom }}</td>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{ user.sexe }}</td>
+                                <td>
+                                    <a href="{{ path('back_user_edit', {'id': user.id}) }}" class="btn btn-success">
+                                        <i class="ti ti-pencil"></i> edit
+                                    </a>
+
+                                    {{ include('admin_back/user/_delete_form.html.twig') }}
+                                </td>
+                            </tr>
+                        {% else %}
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
