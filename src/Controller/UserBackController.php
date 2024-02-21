@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[Route('/back/user')]
 class UserBackController extends AbstractController
@@ -36,7 +37,8 @@ class UserBackController extends AbstractController
                 'ROLE_ADMIN'=> 'ROLE_ADMIN',
                 'ROLE_ETUDIANT'=> 'ROLE_ETUDIANT'
             ],
-            'placeholder'=> 'role'
+            'placeholder'=> 'role',
+
         ));
         $form->handleRequest($request);
 

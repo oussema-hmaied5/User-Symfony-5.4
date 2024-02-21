@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
 {
@@ -15,8 +17,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('Mot_de_passe', PasswordType::class, [
-                'mapped'=> false
+            ->add('plainPassword', PasswordType::class, [
+               'label'=> 'Mot de passe',
+                'constraints'=> [
+                    new NotBlank(),
+                    New Length(min: 4)
+                ]
             ])
             ->add('nom')
             ->add('prenom')
