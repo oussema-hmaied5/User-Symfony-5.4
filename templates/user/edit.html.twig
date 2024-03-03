@@ -1,14 +1,36 @@
+
 {% extends 'profile.html.twig' %}
 
-{% block title %}Mon profil{% endblock %}
+{% block title %}Mon profile {% endblock %}
 
 {% block body %}
-    <h1>{{ app.user.prenom|default('') }} {{ app.user.nom|default('') }}</h1>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
-    <br><br>
-    {{ form_end(form) }}
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+            <h2 class="heading-section">{{ app.user.prenom|default('') }} {{ app.user.nom|default('') }}</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-10">
+            <div class="wrap d-md-flex">
+
+                <div class="login-wrap p-4 p-md-5">
+                    <div class="d-flex">
+
+                    </div>
+
+
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">
+                        Enregistrer
+                    </button>
+                    {{ form_end(form) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

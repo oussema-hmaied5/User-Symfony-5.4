@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -13,16 +14,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use App\Form\SearchUserType;
 
 #[Route('/back/user')]
 class UserBackController extends AbstractController
 {
-    #[Route('/', name: 'back_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/', name: 'back_user_index', methods: ['GET','POST'])]
+    public function index(Request $request, UserRepository $userRepository): Response
     {
+        $data = $request->query->all();
+
+        $users = $userRepository->findBySearchCriteria($data);
+
+        $form = $this->createForm(SearchUserType::class);
+
         return $this->render('admin_back/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'form' => $form->createView(),
+            'users' => $users,
         ]);
+
     }
 
     #[Route('/new', name: 'back_user_new', methods: ['GET', 'POST'])]
@@ -75,6 +85,14 @@ class UserBackController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $form->remove('plainPassword');
+        $form->add('roles', ChoiceType::class, array(
+            'label'=> 'Role',
+            'choices' => ['ROLE_ADMIN' => 'ROLE_ADMIN', 'ROLE_ETUDIANT' => 'ROLE_ETUDIANT'],
+            'multiple'=> true,
+            'expanded'=> true,
+            'placeholder'=> 'role',
+
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

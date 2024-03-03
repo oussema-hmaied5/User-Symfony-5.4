@@ -35,8 +35,9 @@ class UserProfilController extends AbstractController
             return $this->redirectToRoute('user_profil', [], Response::HTTP_SEE_OTHER);
         }
 
+
         return $this->render('user/edit.html.twig', [
-            'user' => $user,
+
             'form' => $form->createView(),
         ]);
     }

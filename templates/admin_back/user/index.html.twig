@@ -3,12 +3,21 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
+
+    {{ form_start(form, {'method': 'GET'}) }}
+    {{ form_row(form.q) }}
+
+
+    {# ... Ajoutez des champs selon vos besoins #}
+    <button type="submit">Rechercher</button>
+    {{ form_end(form) }}
+
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4">List users</h5>
+            <h5 class="card-title fw-semibold mb-4">Liste des utilisateurs</h5>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ path('back_user_new') }}" class="btn btn-primary">Create new</a>
+                    <a href="{{ path('back_user_new') }}" class="btn btn-primary">Ajouter un utilisateur</a>
                     <table class="table">
                         <thead>
                         <tr>
@@ -38,7 +47,7 @@
                                 <td>{{ user.sexe }}</td>
                                 <td>
                                     <a href="{{ path('back_user_edit', {'id': user.id}) }}" class="btn btn-success">
-                                        <i class="ti ti-pencil"></i> edit
+                                        <i class="ti ti-pencil"></i> Modifier
                                     </a>
 
                                     {{ include('admin_back/user/_delete_form.html.twig') }}

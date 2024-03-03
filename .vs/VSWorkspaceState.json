@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\migrations",
+    "\\src",
+    "\\src\\Controller",
+    "\\templates"
+  ],
+  "SelectedNode": "\\src\\Controller\\LoginController.php",
+  "PreviewInSolutionExplorer": false
+}

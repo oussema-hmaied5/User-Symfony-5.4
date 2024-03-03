@@ -39,6 +39,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    public function findBySearchCriteria(array $searchCriteria)
+    {
+        // Utilisez Doctrine QueryBuilder pour construire la requête de recherche
+        $queryBuilder = $this->createQueryBuilder('user');
+
+        if (!empty($searchCriteria['q'])) {
+            $queryBuilder
+                ->andWhere('user.nom = :q')
+                ->orWhere('user.sexe = :q')
+                ->orWhere('user.prenom = :q')
+                ->orWhere('user.email = :q')
+                ->setParameter('q', $searchCriteria['q'])
+                ->orWhere('user.roles LIKE :role')
+
+                ->setParameter('role', '%'.$searchCriteria['q'].'%')
+            ;
+        }
+
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

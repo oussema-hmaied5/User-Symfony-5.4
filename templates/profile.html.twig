@@ -42,11 +42,17 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{{ asset('login/css/style.css') }}">
 </head>
 <body>
-{% block body %}
-    <div id="fh5co-container">
+<div id="fh5co-container">
 
+    {% if is_granted('ROLE_ADMIN') == false %}
         <div class="js-sticky">
             <div class="fh5co-main-nav">
                 <div class="container-fluid">
@@ -62,50 +68,55 @@
                         <a href="#" data-nav-section="menu">Logements</a>
                         <a href="#" data-nav-section="events">Restaurants</a>
                         <a href="#" data-nav-section="reservation">Coworking </a>
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- Continue with the rest of your HTML content -->
-    </div>
-{% endblock %}
+    {% endif %}
+</div>
+<div id="fh5co-container">
+    <section class="ftco-section">
+        <div class="container">
+            {% block body %}
 
-
-
-    {% block javascripts %}
-        <!-- jQuery -->
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <!-- jQuery Easing -->
-        <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-        <!-- Bootstrap -->
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <!-- Bootstrap DateTimePicker -->
-        <script src="{{ asset('js/moment.js') }}"></script>
-        <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
-        <!-- Waypoints -->
-        <script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
-        <!-- Stellar Parallax -->
-        <script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
-
-        <!-- Flexslider -->
-        <script src="{{ asset('js/jquery.flexslider-min.js') }}"></script>
-        <script>
-            $(function () {
-                $('#date').datetimepicker();
-            });
-        </script>
-        <!-- Main JS -->
-        <script src="{{ asset('js/main.js') }}"></script>
-        <!-- Modernizr JS -->
-        <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
-        <!-- FOR IE9 below -->
-        <!--[if lt IE 9]>
-    <script src="{{ asset('js/respond.min.js') }}"></script>
-    <![endif]-->
-    {% endblock %}
+            {% endblock %}
+        </div>
+    </section>
 </div>
 
+{% block javascripts %}
+    <!-- jQuery -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <!-- jQuery Easing -->
+    <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- Bootstrap DateTimePicker -->
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!-- Waypoints -->
+    <script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
+    <!-- Stellar Parallax -->
+    <script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
+
+    <!-- Flexslider -->
+    <script src="{{ asset('js/jquery.flexslider-min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#date').datetimepicker();
+        });
+    </script>
+    <!-- Main JS -->
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!-- Modernizr JS -->
+    <script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/respond.min.js') }}"></script>
+    <![endif]-->
+{% endblock %}
+</div>
 
 
 <!-- Chemins d'accès aux fichiers CSS et JS -->

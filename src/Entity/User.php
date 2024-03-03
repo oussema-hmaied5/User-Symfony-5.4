@@ -39,12 +39,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Regex('/^[A-Z]+$/i')]
+    #[Assert\Regex('/^[A-Z]+$/i', message: 'Veuillez utiliser des alphabets seulement')]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private ?string $sexe = null;
+
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    private $resetToken;
+
 
     public function getId(): ?int
     {
@@ -115,6 +119,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
